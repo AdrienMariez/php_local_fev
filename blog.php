@@ -11,8 +11,11 @@
     <?php include 'header.php';?>
     <?php include 'nav.php';?>
     <div class="body_content">
+        <div class="body_content_title">
+            <h3>Blog</h3>
+        </div>
 
-    <form method="post" action="">
+    <form method="post" action="" class="blog_select">
         <select name="select">
             <option value="croissant">croissant</option>
             <option value="decroissant">decroissant</option>

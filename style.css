@@ -37,17 +37,19 @@ nav{
     margin-left: 5vw;
     max-width: 80vw;
 }
+
+.events_select{
+    align-self: right;
+    margin: 5vw;
+}
+.events_select_desc{
+    align-self: right;    
+}
 .event_content{
     max-width: 70vw;
 }
-.event_title{
-
-}
 .event_img{
     max-width: 70vw;
-}
-.event_text{
-
 }
 .event_place{
     text-align: center;
@@ -73,6 +75,10 @@ nav{
     margin-left: 10vw;
     margin-right: 10vw;
     margin-bottom: 5vh;
+}
+.blog_select{
+    align-self: right;
+    margin: 5vw;
 }
 .blog_img_container{
     float: left;

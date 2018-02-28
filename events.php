@@ -18,6 +18,16 @@
     </div>
 
     <div class="body_content">
+
+    <form method="post" action="" class="events_select">
+        <select name="select">
+            <option value="place">sort by place</option>
+            <option value="date">sort by date</option>
+            <option value="old">see all entries</option>
+        </select> 
+        <input type="submit" value="Submit">
+    </form>
+
         <?php
         
             //Connexion to the database
@@ -33,8 +43,38 @@
                 die("Connection failed: " . $conn->connect_error);
             } 
 
+            if(!isset($_POST['select'])) {
+                $sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."'";    
+            }
+            if(isset($_POST['select'])) {
+                $tri = $_POST['select'];       
+                if($tri == "place"){
+                    $sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."' ORDER BY place ASC";
+                    ?>
+                    <div class="events_select_desc">
+                        <p>Sorted by place.</p>
+                    </div> 
+                    <?php
+                }
+                elseif($tri == "date"){
+                    $sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."'"; 
+                    ?>
+                    <div class="events_select_desc">
+                        <p>Sorted by date.</p>
+                    </div> 
+                    <?php
+                }  
+                else{
+                    $sql = "SELECT * FROM event_table ORDER BY ending_date ASC"; 
+                    ?>
+                    <div class="events_select_desc">
+                        <p>ALl entries sorted by date.</p>
+                    </div> 
+                    <?php
+                }
+            }  
 
-            $sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y") ."-". date("m") ."-". date("d") ."'";
+            //$sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."'";
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
