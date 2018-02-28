@@ -1,0 +1,125 @@
+.header{
+    background-color: lightgrey;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.header_aside{
+    align-self: end;
+    display: flex;
+}
+.header_aside > p{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.header_signin_link{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+h1{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+nav{
+    padding-left: 20px;
+    background-color: lightgrey;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
+}
+
+.body_content{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5vw;
+    max-width: 80vw;
+}
+.event_content{
+    max-width: 70vw;
+}
+.event_title{
+
+}
+.event_img{
+    max-width: 70vw;
+}
+.event_text{
+
+}
+.event_place{
+    text-align: center;
+}
+.event_dates_container{
+    display: flex;
+    flex-direction: column;
+}
+.event_dates_container>div{
+    text-align: center;
+}
+.event_dates_container>div>p:nth-child(2){
+    font-size: 30px;
+}
+.event_publication_date{
+    text-align: right;
+    font-size: 15px;   
+}
+
+.blog_content{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-bottom: 5vh;
+}
+.blog_img_container{
+    float: left;
+    width: 30%;
+}
+.blog_img{
+    width: 100%;   
+}
+.blog_text_container{
+    width: 70%; 
+}
+.blog_text_container > h3{
+    text-align: center;
+    font-size: 30px;    
+}
+.blog_text_container > h6{
+    margin-left: 20px;
+}
+.blog_text_container > .blog_dates{
+    text-align: right;
+    font-size: 15px;
+}
+
+.contact_success{
+    color:green;
+}
+.contact_failed{
+    color: firebrick;
+}
+#contactform{
+    max-width: 70vw;    
+}
+.contact_account{
+    display: flex;
+    flex-direction: column;
+}
+.contact_account_checkboxes,.contact_submit{
+    display: flex; 
+    justify-content: space-around;   
+}
+
+.footer{
+    display: flex;
+    justify-content: flex-end;
+    background-color: lightgrey;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    padding-right: 20px;
+    font-size: 15px;
+}
