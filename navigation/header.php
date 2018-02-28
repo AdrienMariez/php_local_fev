@@ -1,12 +1,11 @@
 <?php
-
   if(!isset($_SESSION)) 
   { 
       session_start(); 
   } 
 ?>
 
-<div class="header">
+<header class="header">
     <div class="header_aside">
 
     <?php  if (isset($_SESSION['username'])) : ?>
@@ -20,4 +19,4 @@
 
     </div>  
     <h1>PHP localhost</h1>
-</div>
+</header>

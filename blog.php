@@ -1,3 +1,5 @@
+<?php include 'config/bdd.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +10,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php include 'header.php';?>
-    <?php include 'nav.php';?>
+    <?php include 'navigation/header.php';?>
+    <?php include 'navigation/nav.php';?>
     <div class="body_content">
         <div class="body_content_title">
             <h3>Blog</h3>
@@ -24,19 +26,6 @@
     </form>
 
         <?php
-        
-            //Connexion to the database
-
-            $servername = "localhost";
-            $username = "root";
-            $password = "casio";
-            $dbname = "fev_php_local";
-        
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            } 
 
             if(!isset($_POST['select'])) {
                 $sql = "SELECT * FROM blog_table";    
@@ -50,8 +39,6 @@
                     $sql = "SELECT * FROM blog_table ORDER BY date DESC"; 
                 }
             }  
-        
-            //$sql = "SELECT id, titre, image, intro, texte, date FROM blog_table";
 
             $result = $conn->query($sql);
             
@@ -85,7 +72,7 @@
     <?php
 
     
-    include 'footer.php';?>
+    include 'navigation/footer.php';?>
     <script src="app.js"></script>
 </body>
 </html>

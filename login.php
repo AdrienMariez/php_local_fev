@@ -1,21 +1,21 @@
-<?php include('server.php') ?>
+<?php include('config/server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registration system PHP and MySQL</title>
+  <title>Login</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-    <?php include 'header.php';?>
-		<?php include 'nav.php';?>
+    <?php include 'navigation/header.php';?>
+		<?php include 'navigation/nav.php';?>
 	
 	<div class="body_content_title">
     <h3>Login</h3>
   </div>
 	 
   <form method="post" action="login.php">
-  	<?php include('errors.php'); ?>
+  	<?php include('config/errors.php'); ?>
   	<div class="input-group">
   		<label>Username</label>
   		<input type="text" name="username" >
@@ -32,7 +32,7 @@
   	</p>
 	</form>
 	
-	<?php include 'footer.php';?>
+	<?php include 'navigation/footer.php';?>
 
 </body>
 </html>

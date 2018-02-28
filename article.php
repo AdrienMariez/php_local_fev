@@ -1,30 +1,21 @@
+<?php include 'config/bdd.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Article</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php include 'header.php';?>
-    <?php include 'nav.php';?>
+    <?php include 'navigation/header.php';?>
+    <?php include 'navigation/nav.php';?>
     <div class="body_content">
         <p>article.php content</p>
 
         <?php
-
-            $servername = "localhost";
-            $username = "root";
-            $password = "casio";
-            $dbname = "fev_php_local";
-
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            } 
 
             //get the id from the link in the blog page
             if(isset($_GET['id'])) {
@@ -62,7 +53,7 @@
 ?>
 
     </div>
-    <?php include 'footer.php'; ?>
+    <?php include 'navigation/footer.php'; ?>
     <script src="app.js"></script>
 </body>
 </html>
