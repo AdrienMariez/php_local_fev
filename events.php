@@ -1,13 +1,8 @@
 <?php include 'config/bdd.php';?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<?php include 'navigation/head.php';?>
+
     <title>Events</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <?php include 'navigation/header.php';?>
@@ -15,7 +10,7 @@
     <div class="body_content">
         <?php  if (isset($_SESSION['username'])) : ?>
 
-    <div class="body_content_title"><?php include 'config/bdd.php';?>
+    <div class="body_content_title">
 
 
         <h3>Events</h3>
@@ -33,6 +28,12 @@
     </form>
 
         <?php 
+
+        // how many rows are in the table 
+        $sql = "SELECT COUNT(*) FROM event_table";
+            
+        include 'config/paginator.php';
+
             if(!isset($_POST['select'])) {
                 $sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."'";    
             }

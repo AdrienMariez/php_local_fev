@@ -1,12 +1,10 @@
-<?php include 'config/bdd.php';?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contact</title>
+    <title>contact</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,11 +19,9 @@
     <div id="contact_callback" class="contact_callback">
         <?php
         if(isset($_POST['email'])) {
-
             //$email_to = "adrien.mariez@gmail.com";
             $email_to = ".com";
             $email_subject = "php localhost website feedback";
-
             function died($error) {
                 ?>
 
@@ -53,15 +49,16 @@
                     </div>
                 <?php
                     
+
+                    include 'config/bdd.php';
+
                     $sql = "INSERT INTO contact_requests (object, email, message, theme, account, age)
                     VALUES ('$object', '$email_from', '$message', '$theme','$account_check', '$your_age_int')";
-
                     if ($conn->query($sql) === TRUE) {
                         echo "";
                     } else {
                         echo "Error connecting database.";
                     }
-
                     $conn->close();
             }
         
@@ -72,6 +69,7 @@
                 !isset($_POST['message'])) {
                 died('We are sorry, but there appears to be a problem with the form you submitted.');       
             }
+            //x
         
             
         
@@ -81,38 +79,27 @@
             $theme = isset($_POST['theme']) ? $_POST['theme'] : ''; // not required
             $account_check = $_POST['account_check']; // not required
             $your_age = $_POST['your_age']; // not required
-
             $your_age_int = intval($your_age);
-
             $forbidden    = 'simplon';
-
             $check_forbidden = stripos($object, $forbidden);
         
             $error_message = "";
         
             $success_message = "";
-
             $string_exp = "/^[A-Za-z .'-]+$/";
-
-
         if(!preg_match($string_exp,$object)) {
             $error_message .= 'The object of your message is not valid.<br />';
         }  
-
         if(strlen($message) < 1) {
             $error_message .= 'Your message do not appear to be valid.<br />';
         }
-
         //var_dump($check_forbidden);
-
         if ($check_forbidden !== false) {
             $error_message .= 'The object of your message contains forbidden words. Be polite !<br />';
         }
-
         if(strlen($error_message) > 0) {
             died($error_message);
         }
-
         if(strlen($error_message) == 0) {
             $success_message = "<p>Your following message :</p>
             <p>

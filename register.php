@@ -1,14 +1,14 @@
-<?php include('config/server.php') ?>
-<!DOCTYPE html>
-<html>
-<head>
+<?php include 'config/server.php';?>
+
+<?php include 'navigation/head.php';?>
+
   <title>Registration</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
 
-    <?php include 'navigation/header.php';?>
-		<?php include 'navigation/nav.php';?>
+  <?php include 'navigation/header.php';?>
+	<?php include 'navigation/nav.php';?>
 
 
 	<div class="body_content_title">

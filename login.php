@@ -1,9 +1,8 @@
-<?php include('config/server.php') ?>
-<!DOCTYPE html>
-<html>
-<head>
+<?php include 'config/server.php';?>
+
+<?php include 'navigation/head.php';?>
+
   <title>Login</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 

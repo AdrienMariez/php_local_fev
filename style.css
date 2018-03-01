@@ -101,6 +101,17 @@ nav{
     text-align: right;
     font-size: 15px;
 }
+.blog_pager_links{
+    margin: 5vw;
+    display: flex;
+    justify-content: center;
+}
+.blog_pager_links>a{
+    margin: 1vw;
+}
+.blog_pager_links>b{
+    margin: 1vw;
+}
 
 .contact_success{
     color:green;
