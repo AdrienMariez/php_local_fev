@@ -1,3 +1,14 @@
+<!--
+
+This file is used by both the login and the register page
+
+// REGISTER USER
+
+// LOGIN USER
+
+-->
+
+
 <?php
 session_start();
 
@@ -10,6 +21,7 @@ $errors = array();
 
 
 // REGISTER USER
+
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
   $username = mysqli_real_escape_string($conn, $_POST['username']);

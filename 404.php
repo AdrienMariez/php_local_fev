@@ -1,3 +1,4 @@
+<!--page shown in case of errors, redirected from .htaccess-->
 
 <?php include 'navigation/head.php';?>
 

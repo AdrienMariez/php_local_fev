@@ -1,3 +1,14 @@
+<!--
+
+The php code of the logout was not moved as it's only used on this page.
+
+the bdd.php is not called because it would connect to the database for no reason.
+
+"Les utilisateurs connectés doivent pouvoir se déconnecter facilement.
+OK"
+
+-->
+
     <?php
 
         session_start();

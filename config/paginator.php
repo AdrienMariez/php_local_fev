@@ -1,3 +1,11 @@
+<!--
+
+Set up of the paginator, used in Blog and Events
+
+SOme parts of the code were implemented in the pages since some session based data are needed, namely the filter options.
+
+-->
+
 <?php
 
 
@@ -7,7 +15,8 @@ $r = mysqli_fetch_row($result);
 $numrows = $r[0];
 
 // number of rows to show per page
-$rowsperpage = 2;
+//change this value to shom more items on each page
+$rowsperpage = 3;
 // find out total pages
 $totalpages = ceil($numrows / $rowsperpage);
 

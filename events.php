@@ -1,6 +1,42 @@
-<?php include 'config/bdd.php';?>
+<!--
+"Un événement contient :
 
-<?php include 'navigation/head.php';?>
+    Un titre
+    Une image
+    Un texte d'intro
+    Une date de début
+    Une date de fin
+    Un lieu
+    Une date de publication
+OK
+La page Evénéments liste uniquement les événements à venir ou en cours. 
+OK
+
+Seul les utilisateurs connectés peuvent accéder à cette liste d'événements,
+OK
+
+si je ne suis pas connecté, je dois être redirigé sur la page de log in.
+FAIT DIFFEREMENT (OK)
+
+Bonus: Permettre à l'utilisateur de filtrer la liste des événements par lieu"
+FAIT DIFFEREMENT
+
+-->
+
+<?php include 'config/bdd.php';
+
+        if(!empty($_POST['select_events'])){
+            $tri_events = $_POST['select_events'];
+            $_SESSION['tri_events'] = $tri_events;
+        }else{
+            if(!isset($_SESSION['tri_events'])){
+                $tri_events = "place";
+            }else{
+                $tri_events = $_SESSION['tri_events'];
+            }
+        }
+
+include 'navigation/head.php';?>
 
     <title>Events</title>
 </head>
@@ -19,10 +55,10 @@
     <div class="body_content">
 
     <form method="post" action="" class="events_select">
-        <select name="select">
-            <option value="place">sort by place</option>
-            <option value="date">sort by date</option>
-            <option value="old">see all entries</option>
+        <select name="select_events">
+            <option <?php if($tri_events == "place") {echo "selected='selected'";} ?> value="place">sort by place</option>
+            <option <?php if($tri_events == "date") {echo "selected='selected'";} ?>  value="date">sort by date</option>
+            <option <?php if($tri_events == "old") {echo "selected='selected'";} ?> value="old">see all entries</option>
         </select> 
         <input type="submit" value="Submit">
     </form>
@@ -34,21 +70,33 @@
             
         include 'config/paginator.php';
 
-            if(!isset($_POST['select'])) {
-                $sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."'";    
+            if(!isset($tri_events)) {
+                //$tri = "unset";
+                
+                $sql = "SELECT *
+                        FROM event_table
+                        WHERE ending_date>='". date("Y-m-d") ."'
+                        LIMIT $offset, $rowsperpage";    
             }
-            if(isset($_POST['select'])) {
-                $tri = $_POST['select'];       
-                if($tri == "place"){
-                    $sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."' ORDER BY place ASC";
+            else {
+
+                if($tri_events == "place"){
+                    $sql = "SELECT *
+                            FROM event_table
+                            WHERE ending_date>='". date("Y-m-d") ."'
+                            ORDER BY place ASC
+                            LIMIT $offset, $rowsperpage";
                     ?>
                     <div class="events_select_desc">
                         <p>Sorted by place.</p>
                     </div> 
                     <?php
                 }
-                elseif($tri == "date"){
-                    $sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."'"; 
+                elseif($tri_events == "date"){
+                    $sql = "SELECT *
+                            FROM event_table
+                            WHERE ending_date>='". date("Y-m-d") ."'
+                            LIMIT $offset, $rowsperpage"; 
                     ?>
                     <div class="events_select_desc">
                         <p>Sorted by date.</p>
@@ -56,14 +104,19 @@
                     <?php
                 }  
                 else{
-                    $sql = "SELECT * FROM event_table ORDER BY ending_date ASC"; 
+                    $sql = "SELECT *
+                            FROM event_table
+                            ORDER BY ending_date ASC
+                            LIMIT $offset, $rowsperpage"; 
                     ?>
                     <div class="events_select_desc">
-                        <p>ALl entries sorted by date.</p>
+                        <p>All entries sorted by date.</p>
                     </div> 
                     <?php
                 }
             }  
+
+            //var_dump($_SESSION['tri']);
 
             //$sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."'";
             $result = $conn->query($sql);
@@ -108,6 +161,13 @@
             } else {
                 echo "No events were found.";
             }
+        ?>
+            <div class="blog_pager_links">
+
+        <?php include 'config/paginator_links.php';?>
+            
+            </div>
+        <?php
             $conn->close();
         ?>
     </div>

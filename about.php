@@ -1,3 +1,8 @@
+<!--plain html
+"La page "A propos" contient du contenu HTML statique."
+OK
+-->
+<?php include 'config/session.php';?>
 
 <?php include 'navigation/head.php';?>
 

@@ -1,3 +1,8 @@
+<!--Page for all blog posts clicked on
+"La page article de blog affiche le contenu complet d'un billet."
+OK
+-->
+
 <?php include 'config/bdd.php';?>
 
 <?php include 'navigation/head.php';?>

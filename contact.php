@@ -1,3 +1,28 @@
+<!--
+
+"La page de contact contient un formulaire demandant à l'utilisateur de saisir :
+
+    L'objet de son message
+    Son message
+    Son age
+    Un thème (à choisir parmis une liste pré-définie)
+OK
+
+Nous voulons aussi savoir si l'utilisateur est un utilisateur connecté ou non.
+OK
+
+Chaque demande de contact sera stocké en base de données.
+OK
+
+Bonus: L'utilisateur ne doit pas pouvoir saisir "Simplon" dans l'objet de son message
+OK"
+
+-->
+
+<?php include 'config/session.php';?>
+
+<?php include 'config/bdd.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,9 +73,6 @@
                         ?>
                     </div>
                 <?php
-                    
-
-                    include 'config/bdd.php';
 
                     $sql = "INSERT INTO contact_requests (object, email, message, theme, account, age)
                     VALUES ('$object', '$email_from', '$message', '$theme','$account_check', '$your_age_int')";
@@ -68,9 +90,7 @@
                 // !isset($_POST['your_age']) ||
                 !isset($_POST['message'])) {
                 died('We are sorry, but there appears to be a problem with the form you submitted.');       
-            }
-            //x
-        
+            }        
             
         
             $object = $_POST['object']; // required

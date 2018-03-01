@@ -1,3 +1,10 @@
+<!--
+
+"Les utilisateurs ayant un compte doivent pouvoir s'indentifier en saissant leur nom d'utilisateur et leur mot de passe afin de pouvoir accéder à la page "Evénéments".
+OK"
+
+-->
+
 <?php include 'config/server.php';?>
 
 <?php include 'navigation/head.php';?>

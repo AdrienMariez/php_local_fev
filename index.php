@@ -1,3 +1,9 @@
+<!--
+
+"La home page contient du contenu HTML statique"
+
+-->
+<?php include 'config/session.php';?>
 
 <?php include 'navigation/head.php';?>
 

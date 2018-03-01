@@ -1,6 +1,45 @@
-<?php include 'config/bdd.php';?>
+<!--
+    -Page for all the blog-
 
-<?php include 'navigation/head.php';?>
+"La page blog liste par ordre décroissant date de publication tous les billets de blog présent en base de donnée.
+OK
+
+Un article de blog contient :
+
+    Un titre
+    Une image
+    Un texte d'intro
+    Le texte complet
+    Une date de publication
+OK
+
+La liste affiche pour chaque billet de blog le titre, l'image, le texte d'intro et la date du publication. Au clic sur un billet de blog amène sur l'article complet Article de blog.
+OK
+
+Bonus: L'utilisateur doit pourvoir changer l'ordre d'affichage des billets de blog (croissant ou décroissant sur la date de publication).
+OK
+
+Bonus: Ajouter un pager pour afficher que 5 articles par page
+OK"
+
+Les utilisateurs connectés pourront écrire de nouveaux articles de blogs et modifier les articles dont ils sont les auteurs.
+
+-->
+
+<?php include 'config/bdd.php';
+
+    if(!empty($_POST['select_blog'])){
+        $tri_blog = $_POST['select_blog'];
+        $_SESSION['tri_blog'] = $tri_blog;
+    }else{
+        if(!isset($_SESSION['tri_blog'])){
+            $tri_blog = "croissant";
+        }else{
+            $tri_blog = $_SESSION['tri_blog'];
+        }
+    }
+
+include 'navigation/head.php';?>
 
     <title>blog</title>
 </head>
@@ -13,9 +52,9 @@
         </div>
 
     <form method="post" action="" class="blog_select">
-        <select name="select">
-            <option value="croissant">croissant</option>
-            <option value="decroissant">decroissant</option>
+        <select name="select_blog">
+            <option <?php if($tri_blog == "croissant") {echo "selected='selected'";} ?> value="croissant">croissant</option>
+            <option <?php if($tri_blog == "decroissant") {echo "selected='selected'";} ?> value="decroissant">decroissant</option>
         </select> 
         <input type="submit" value="Submit">
     </form>
@@ -28,13 +67,11 @@
 
     include 'config/paginator.php';
 
-
-    if(!isset($_POST['select'])) {
+    if(!isset($tri_blog)) {
         $sql = "SELECT * FROM blog_table LIMIT $offset, $rowsperpage";    
     }
-    if(isset($_POST['select'])) {
-        $tri = $_POST['select'];       
-        if($tri == "croissant"){
+    else {      
+        if($tri_blog == "croissant"){
             $sql = "SELECT * FROM blog_table ORDER BY date ASC LIMIT $offset, $rowsperpage"; 
         }     
         else{

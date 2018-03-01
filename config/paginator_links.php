@@ -1,3 +1,10 @@
+<!--
+
+Bottom links used for the paginator, used in Blog and Events
+
+-->
+
+
 <?php
 
 /******  build the pagination links ******/

@@ -1,6 +1,8 @@
+<!--This page is needed for any page with interraction with the ddb-->
+
 <?php
 
-//This file is used for all connexions to the database
+//all connexions to the database
 
 $servername = "localhost";
 $username = "root";
@@ -8,7 +10,7 @@ $password = "casio";
 $dbname = "fev_php_local";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
+// Check connection for errors
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 

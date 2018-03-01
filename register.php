@@ -1,3 +1,20 @@
+<!--
+
+"Pour la création d'un compte, l'utilisateur doit choisir un nom d'utilisateur et un mot de passe. Le nom d'utilisateut doit être unique.
+OK
+
+Il doit saisir 2 fois son mot de passe afin d'éviter toute erreur de saisie.
+OK
+
+Pour des raisons de sécurité, il doit être impossible de retrouver le mot de passe des utilisateurs dans la base de données.
+OK
+
+Bonus: La vérification de l'unicité du nom utilisateur et la vérification de la correspondance des mots de passe seront en AJAX.
+NIET (OK)
+"
+
+-->
+
 <?php include 'config/server.php';?>
 
 <?php include 'navigation/head.php';?>
