@@ -3,6 +3,8 @@
 OK
 -->
 
+<?php include 'config/session.php';?>
+
 <?php include 'config/bdd.php';?>
 
 <?php include 'navigation/head.php';?>

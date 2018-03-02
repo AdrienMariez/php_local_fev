@@ -23,6 +23,8 @@ FAIT DIFFEREMENT
 
 -->
 
+<?php include 'config/session.php';?>
+
 <?php include 'config/bdd.php';
 
         if(!empty($_POST['select_events'])){
@@ -56,70 +58,119 @@ include 'navigation/head.php';?>
 
     <form method="post" action="" class="events_select">
         <select name="select_events">
-            <option <?php if($tri_events == "place") {echo "selected='selected'";} ?> value="place">sort by place</option>
-            <option <?php if($tri_events == "date") {echo "selected='selected'";} ?>  value="date">sort by date</option>
-            <option <?php if($tri_events == "old") {echo "selected='selected'";} ?> value="old">see all entries</option>
+        <option value="all_places">see entries in all places</option>
+        <?php
+        
+        $place = "SELECT place FROM event_table";
+        $place_result = $conn->query($place);
+
+        if ($place_result->num_rows > 0) {
+            // output data of each row
+            while($row = $place_result->fetch_assoc()) {
+            ?>
+                <option <?php if($row["place"] == $tri_events) {echo "selected='selected'";} ?> value="<?php echo "" . $row["place"]. ""; ?>"><?php echo "" . $row["place"]. ""; ?></option>
+
+            <?php
+            }
+        } else {
+            echo "No places were found.";
+        }
+        ?>
         </select> 
+        <input type="checkbox" name="history_check" value="1"> include history
         <input type="submit" value="Submit">
     </form>
 
-        <?php 
+        <?php
 
         // how many rows are in the table 
         $sql = "SELECT COUNT(*) FROM event_table";
-            
+
+
+        if (!isset($_POST['history_check'])){
+            $history_check = '0';
+        }else{
+            $history_check = $_POST['history_check'];
+        }
+        //var_dump($history_check);
+
         include 'config/paginator.php';
 
-            if(!isset($tri_events)) {
-                //$tri = "unset";
-                
+            if(!isset($tri_events) && $history_check=='0') {
+                //all places default + no history
+                var_dump('A-1');
                 $sql = "SELECT *
                         FROM event_table
                         WHERE ending_date>='". date("Y-m-d") ."'
+                        ORDER BY ending_date ASC
+                        LIMIT $offset, $rowsperpage";    
+            }
+            elseif(!isset($tri_events) && $history_check=='1') {
+                //all places default + no history
+                var_dump('A-2');
+                $sql = "SELECT *
+                        FROM event_table
+                        WHERE ending_date>='". date("Y-m-d") ."'
+                        ORDER BY ending_date ASC
                         LIMIT $offset, $rowsperpage";    
             }
             else {
-
-                if($tri_events == "place"){
-                    $sql = "SELECT *
-                            FROM event_table
-                            WHERE ending_date>='". date("Y-m-d") ."'
-                            ORDER BY place ASC
-                            LIMIT $offset, $rowsperpage";
-                    ?>
-                    <div class="events_select_desc">
-                        <p>Sorted by place.</p>
-                    </div> 
-                    <?php
-                }
-                elseif($tri_events == "date"){
-                    $sql = "SELECT *
-                            FROM event_table
-                            WHERE ending_date>='". date("Y-m-d") ."'
-                            LIMIT $offset, $rowsperpage"; 
-                    ?>
-                    <div class="events_select_desc">
-                        <p>Sorted by date.</p>
-                    </div> 
-                    <?php
-                }  
-                else{
-                    $sql = "SELECT *
+                if($tri_events == "all_places"){
+                
+                    if($history_check=='1'){
+                        //all places + history
+                        var_dump('B-1');
+                        $sql = "SELECT *
                             FROM event_table
                             ORDER BY ending_date ASC
-                            LIMIT $offset, $rowsperpage"; 
-                    ?>
-                    <div class="events_select_desc">
-                        <p>All entries sorted by date.</p>
-                    </div> 
-                    <?php
+                            LIMIT $offset, $rowsperpage";
+                    }
+                    else{
+                        //all places + no history
+                        var_dump('B-2');
+                        $sql = "SELECT *
+                                FROM event_table
+                                WHERE ending_date>='". date("Y-m-d") ."'
+                                ORDER BY ending_date ASC
+                                LIMIT $offset, $rowsperpage";
+                    }
                 }
+                if($tri_events !== "all_places"){                
+                    if($history_check=='1'){
+                        //specific + history
+                        var_dump('C-1');
+                        $sql = "SELECT *
+                                FROM event_table
+                                WHERE place='$tri_events'
+                                ORDER BY ending_date ASC
+                                LIMIT $offset, $rowsperpage";
+                    }
+                    else{
+                        var_dump('C-2');
+                        //specific + no history
+                        $sql = "SELECT *
+                                FROM event_table
+                                WHERE ending_date>='". date("Y-m-d") ."'
+                                AND place='$tri_events'
+                                ORDER BY ending_date ASC
+                                LIMIT $offset, $rowsperpage";
+                    }
+                }
+                    ?>
+                    <!--<div class="events_select_desc">
+                        <p>Entries from <?php //$tri_events ?>.</p>
+                    </div>-->
+                    <?php
             }  
 
             //var_dump($_SESSION['tri']);
 
             //$sql = "SELECT * FROM event_table WHERE ending_date>='". date("Y-m-d") ."'";
+            //var_dump($sql);
+
             $result = $conn->query($sql);
+            
+            //var_dump($row);
             
             if ($result->num_rows > 0) {
                 // output data of each row

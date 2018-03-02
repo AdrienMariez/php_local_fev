@@ -26,6 +26,8 @@ Les utilisateurs connectés pourront écrire de nouveaux articles de blogs et mo
 
 -->
 
+<?php include 'config/session.php';?>
+
 <?php include 'config/bdd.php';
 
     if(!empty($_POST['select_blog'])){
